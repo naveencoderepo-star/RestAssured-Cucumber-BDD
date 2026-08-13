@@ -3,45 +3,69 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.And;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.config.RedirectConfig;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import pojo.AddPlace;
 import pojo.Location;
+import resources.TestDataBuild;
+import resources.Utils;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class StepDefinition {
-    private RequestSpecification req;
-    private Response resp;
 
+public class StepDefinition extends Utils {
+
+    private RequestSpecification requestSpec;
+    private Response apiResponse;
+    private AddPlace addPlacePayload;
+    TestDataBuild testDataBuild = new TestDataBuild();
 
 
     @Given("AddPlaceAPI is available with payload")
-    public void add_place_api_is_available_with_payload() {
+    public void add_place_api_is_available_with_payload() throws Exception {
 
 
-        RestAssured.baseURI = "https://rahulshettyacademy.com";
-        req = RestAssured.given()
-                .header("Content-Type", "application/json")
-                .body("{\"location\":{\"lat\":-38.383494,\"lng\":33.427362},\"accuracy\":50,\"name\":\"Frontline house\",\"phone_number\":\"(+91) 983 893 3937\",\"address\":\"29, side layout, cohen 09\",\"types\":[\"shoe park\",\"shop\"],\"website\":\"http://google.com\",\"language\":\"French-IN\"}");
+        requestSpecification();
+
     }
 
     @When("user call AddPlaceAPI with valid post http request method,")
-    public void user_call_add_place_api_with_valid_post_http_request_method() {
-        // Adjust the path to match your API    
-        resp = req.when().post("/maps/api/place/add/json");
+    public void user_call_add_place_api_with_valid_post_http_request_method() throws FileNotFoundException {
+        // perform the POST call and capture response for assertions in later steps
+        apiResponse = given()
+                .spec(requestSpecification())
+                .config(RestAssured.config().redirect(RedirectConfig.redirectConfig().followRedirects(true)))
+                .when()
+                .post("maps/api/place/add/json")
+                .then()
+                .extract()
+                .response();
     }
 
     @Then("the API call is successful and response status code is {int}")
-    public void the_api_call_is_successful_and_response_status_code_is(Integer code) {
-        resp.then().statusCode(code);
+    public void the_api_call_is_successful_and_response_status_code_is(Integer expectedStatusCode) {
+        // assert status code returned by the response
+        assertThat(apiResponse.getStatusCode(), equalTo(expectedStatusCode));
+        // also check content type quickly to match original intent
+        assertThat(apiResponse.getContentType().toLowerCase().contains("application/json"), equalTo(true));
     }
 
-    @Then("Status in response body is OK")
-    public void status_in_response_body_is_ok() {
-        String status = resp.jsonPath().getString("status");
-        assertThat(status, equalTo("OK"));
+    @And("{string} in response body is {string}")
+    public void verify_field_in_response_body(String responseKey, String expectedValue) {
+        // make keys case-insensitive by lowering (feature uses "Status" but JSON has "status")
+        String normalizedKey = responseKey.toLowerCase();
+        String actualValue = apiResponse.jsonPath().getString(normalizedKey);
+        assertThat(actualValue, equalTo(expectedValue));
     }
 }
