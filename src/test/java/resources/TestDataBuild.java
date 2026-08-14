@@ -8,7 +8,6 @@ import java.util.List;
 
 public class TestDataBuild {
 
-
     public AddPlace addPlacePayload() {
 
         AddPlace addPlace = new AddPlace();

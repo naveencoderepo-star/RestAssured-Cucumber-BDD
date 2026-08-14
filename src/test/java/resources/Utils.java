@@ -10,18 +10,15 @@ import io.restassured.specification.RequestSpecification;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
-
 public class Utils {
 
     TestDataBuild testDataBuild = new TestDataBuild();
 
-    public RequestSpecification requestSpecification() throws FileNotFoundException {
-
+    public RequestSpecification requestSpecificationAddPlace() throws FileNotFoundException {
 
         RestAssured.baseURI = "https://rahulshettyacademy.com/";
 
         PrintStream log = new PrintStream("logging.text");
-
 
         RequestSpecification requestSpec = new RequestSpecBuilder()
                 .setBaseUri("https://rahulshettyacademy.com/")
@@ -33,7 +30,5 @@ public class Utils {
                 .build();
 
         return requestSpec;
-
-
     }
 }

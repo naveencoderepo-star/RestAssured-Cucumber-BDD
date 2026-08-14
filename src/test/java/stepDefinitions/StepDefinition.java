@@ -5,19 +5,14 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RedirectConfig;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import pojo.AddPlace;
-import pojo.Location;
 import resources.TestDataBuild;
 import resources.Utils;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,15 +31,15 @@ public class StepDefinition extends Utils {
     public void add_place_api_is_available_with_payload() throws Exception {
 
 
-        requestSpecification();
+        requestSpecificationAddPlace();
 
     }
 
     @When("user call AddPlaceAPI with valid post http request method,")
     public void user_call_add_place_api_with_valid_post_http_request_method() throws FileNotFoundException {
-        // perform the POST call and capture response for assertions in later steps
+
         apiResponse = given()
-                .spec(requestSpecification())
+                .spec(requestSpecificationAddPlace())
                 .config(RestAssured.config().redirect(RedirectConfig.redirectConfig().followRedirects(true)))
                 .when()
                 .post("maps/api/place/add/json")
@@ -55,15 +50,14 @@ public class StepDefinition extends Utils {
 
     @Then("the API call is successful and response status code is {int}")
     public void the_api_call_is_successful_and_response_status_code_is(Integer expectedStatusCode) {
-        // assert status code returned by the response
+
         assertThat(apiResponse.getStatusCode(), equalTo(expectedStatusCode));
-        // also check content type quickly to match original intent
         assertThat(apiResponse.getContentType().toLowerCase().contains("application/json"), equalTo(true));
     }
 
     @And("{string} in response body is {string}")
     public void verify_field_in_response_body(String responseKey, String expectedValue) {
-        // make keys case-insensitive by lowering (feature uses "Status" but JSON has "status")
+
         String normalizedKey = responseKey.toLowerCase();
         String actualValue = apiResponse.jsonPath().getString(normalizedKey);
         assertThat(actualValue, equalTo(expectedValue));

@@ -26,3 +26,23 @@ Body:
         "shop"
     ]
 }
+HTTP/1.1 200 OK
+Date: Fri, 14 Aug 2026 06:15:28 GMT
+Server: Apache/2.4.52 (Ubuntu)
+Strict-Transport-Security: max-age=604800; includeSubDomains
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST
+Access-Control-Max-Age: 3600
+Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With
+Content-Length: 194
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Content-Type: application/json;charset=UTF-8
+
+{
+    "status": "OK",
+    "place_id": "6c24a21537fd1eb5b3a67cdd015ae1e2",
+    "scope": "APP",
+    "reference": "198ffe9ee64a545cebf372f4285e4cf6198ffe9ee64a545cebf372f4285e4cf6",
+    "id": "198ffe9ee64a545cebf372f4285e4cf6"
+}

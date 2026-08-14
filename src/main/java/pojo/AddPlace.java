@@ -13,14 +13,6 @@ public class AddPlace {
     private Location location;
     private List<String> types;
 
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
     public int getAccuracy() {
         return accuracy;
     }
@@ -35,6 +27,14 @@ public class AddPlace {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhone_number() {
+        return phone_number;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public String getAddress() {
@@ -76,6 +76,4 @@ public class AddPlace {
     public void setTypes(List<String> types) {
         this.types = types;
     }
-
-
 }
