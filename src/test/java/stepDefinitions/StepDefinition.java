@@ -13,6 +13,7 @@ import resources.TestDataBuild;
 import resources.Utils;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,7 +37,7 @@ public class StepDefinition extends Utils {
     }
 
     @When("user call AddPlaceAPI with valid post http request method,")
-    public void user_call_add_place_api_with_valid_post_http_request_method() throws FileNotFoundException {
+    public void user_call_add_place_api_with_valid_post_http_request_method() throws IOException {
 
         apiResponse = given()
                 .spec(requestSpecificationAddPlace())

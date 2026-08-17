@@ -27,7 +27,7 @@ Body:
     ]
 }
 HTTP/1.1 200 OK
-Date: Fri, 14 Aug 2026 06:15:28 GMT
+Date: Mon, 17 Aug 2026 03:25:33 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Strict-Transport-Security: max-age=604800; includeSubDomains
 Access-Control-Allow-Origin: *
@@ -41,8 +41,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "6c24a21537fd1eb5b3a67cdd015ae1e2",
+    "place_id": "52ebd36b842e34e4ab1f2bd2e8c44881",
     "scope": "APP",
-    "reference": "198ffe9ee64a545cebf372f4285e4cf6198ffe9ee64a545cebf372f4285e4cf6",
-    "id": "198ffe9ee64a545cebf372f4285e4cf6"
+    "reference": "545d4284bff3dd6c7ce71495fca9d7d9545d4284bff3dd6c7ce71495fca9d7d9",
+    "id": "545d4284bff3dd6c7ce71495fca9d7d9"
 }
