@@ -12,11 +12,11 @@ Multiparts:		<none>
 Body:
 {
     "accuracy": 50,
-    "name": "Frontline house",
+    "name": "AK",
     "phone_number": "(+91) 983 893 3937",
-    "address": "29, side layout, cohen 09",
+    "address": "Chennai, India",
     "website": "http://google.com",
-    "language": "French-IN",
+    "language": "Tamil",
     "location": {
         "lat": -38.383494,
         "lng": 33.427362
@@ -27,7 +27,7 @@ Body:
     ]
 }
 HTTP/1.1 200 OK
-Date: Mon, 17 Aug 2026 03:25:33 GMT
+Date: Tue, 18 Aug 2026 11:04:11 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Strict-Transport-Security: max-age=604800; includeSubDomains
 Access-Control-Allow-Origin: *
@@ -41,8 +41,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "52ebd36b842e34e4ab1f2bd2e8c44881",
+    "place_id": "9cb2e530bee8fb1bf3bdce3b214a7b41",
     "scope": "APP",
-    "reference": "545d4284bff3dd6c7ce71495fca9d7d9545d4284bff3dd6c7ce71495fca9d7d9",
-    "id": "545d4284bff3dd6c7ce71495fca9d7d9"
+    "reference": "d0573c66f927c5baf928df5950884233d0573c66f927c5baf928df5950884233",
+    "id": "d0573c66f927c5baf928df5950884233"
 }

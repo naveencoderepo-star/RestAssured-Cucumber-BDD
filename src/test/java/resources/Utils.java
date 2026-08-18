@@ -15,27 +15,33 @@ import java.util.Properties;
 
 public class Utils {
 
+
+    public static RequestSpecification requestSpec;
+
     TestDataBuild testDataBuild = new TestDataBuild();
 
     public RequestSpecification requestSpecificationAddPlace() throws IOException {
 
 
-        PrintStream log = new PrintStream("logging.text");
+        if (requestSpec == null) {
+            PrintStream log = new PrintStream("logging.text");
 
-        RequestSpecification requestSpec = new RequestSpecBuilder()
-                .setBaseUri(getGlobalValue("baseUrl"))
-                .addQueryParam("key", "qaclick123")
-                .addFilter(RequestLoggingFilter.logRequestTo(log))
-                .addFilter(ResponseLoggingFilter.logResponseTo(log))
-                .setContentType(ContentType.JSON)
-                .setBody(testDataBuild.addPlacePayload())
-                .build();
+            requestSpec = new RequestSpecBuilder()
+                    .setBaseUri(getGlobalValue("baseUrl"))
+                    .addQueryParam("key", "qaclick123")
+                    .addFilter(RequestLoggingFilter.logRequestTo(log))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                    .setContentType(ContentType.JSON)
+                    .build();
+
+            return requestSpec;
+        }
 
         return requestSpec;
     }
 
 
-    public  static String getGlobalValue(String key) throws IOException {
+    public static String getGlobalValue(String key) throws IOException {
 
         Properties prop = new Properties();
         FileInputStream fis = new FileInputStream("src/test/java/resources/global.properties");

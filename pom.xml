@@ -55,4 +55,15 @@
 
     </dependencies>
 
+    <build>
+        <testResources>
+            <testResource>
+                <directory>src/test/java</directory>
+                <includes>
+                    <include>features/**</include>
+                </includes>
+            </testResource>
+        </testResources>
+    </build>
+
 </project>
