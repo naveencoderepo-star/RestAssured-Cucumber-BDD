@@ -2,12 +2,13 @@ Feature: Validating the place APIs
 
   Scenario Outline: Verify if place is added successfully using AddPlaceAPI
     Given AddPlaceAPI is available with payload "<name>", "<language>", "<address>"
-    When user call "AddPlaceAPI" with valid "post" http request method,
+    When user call "addPlaceAPI" with valid "post" http request method,
     Then the API call is successful and response status code is 200
     And "Status" in response body is "OK"
     And "scope" in response body is "APP"
+    And verify place_Id created maps to "<name>" using "getPlaceAPI"
 
-  Examples:
+    Examples:
 
-    | name     | language | address          |
-    | AK   | Tamil    | Chennai, India   |
+      | name | language | address        |
+      | AK   | Tamil    | Chennai, India |
